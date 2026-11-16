@@ -28,6 +28,13 @@ def parse_trade(raw):
     }
 
 
+def next_delay(attempt):
+    second = 2 ** attempt
+    return min(60,second)
+
+        
+
+
 if __name__ == "__main__":
     raw = '{"e":"trade","E":1794643117119,"s":"BTCUSDT","t":6853228070,"p":"67174.08000000","q":"0.00018000","T":1794643117119,"m":true,"M":true}'
     print(parse_trade(raw))

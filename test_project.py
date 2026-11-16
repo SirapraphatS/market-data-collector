@@ -1,4 +1,5 @@
-from project import parse_trade
+from project import parse_trade 
+from project import next_delay
 
 
 def test_parse_trade():
@@ -8,3 +9,10 @@ def test_parse_trade():
     assert result["price"] == 67174.08000000
     assert result["quantity"] == 0.00018000
     assert result["symbol"] == "BTCUSDT"
+
+
+def test_next_delay():
+    assert next_delay(0) == 1
+    assert next_delay(3) == 8
+    assert next_delay(7) == 60
+
