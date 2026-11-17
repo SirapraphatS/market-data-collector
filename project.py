@@ -5,7 +5,7 @@ import websockets
 import json
 import sqlite3
 
-URL = "wss://data-stream.binance.vision:443/ws/btcusdt@trade"
+URL = 'wss://data-stream.binance.vision:443/ws/btcusdt@trade'
 
 def init_db(path):
     conn = sqlite3.connect(path)
@@ -15,7 +15,8 @@ def init_db(path):
             price REAL,
             quantity REAL,
             trade_time_ms INTEGER,
-            is_buyer_maker INTEGER
+            is_buyer_maker INTEGER,
+            symbol TEXT
         )"""
     )
     conn.commit()
@@ -43,12 +44,12 @@ async def main():
 def parse_trade(raw):
     data = json.loads(raw)
     return {
-        "trade_id": int(data["t"]),
-        "price": float(data["p"]),           
-        "quantity": float(data["q"]),        
-        "trade_time_ms": int(data["T"]),    
-        "is_buyer_maker": data["m"],
-        "symbol": data["s"],
+        'trade_id': int(data['t']),
+        'price': float(data['p']),           
+        'quantity': float(data['q']),        
+        'trade_time_ms': int(data['T']),    
+        'is_buyer_maker': data['m'],
+        'symbol': data['s'],
     }
 
 
@@ -59,7 +60,7 @@ def next_delay(attempt):
         
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     raw = '{"e":"trade","E":1794643117119,"s":"BTCUSDT","t":6853228070,"p":"67174.08000000","q":"0.00018000","T":1794643117119,"m":true,"M":true}'
     print(parse_trade(raw))
     asyncio.run(main())
