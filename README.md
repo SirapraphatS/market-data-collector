@@ -1,6 +1,6 @@
-# market-collector
+# market-data-collector
 
-market-collector connects to Binance's public WebSocket stream and listens to live BTC/USDT trades. It parses each trade message and saves it to a local SQLite database, skipping any trade it has already stored.
+market-data-collector connects to Binance's public WebSocket stream and listens to live BTC/USDT trades. It parses each trade message and saves it to a local SQLite database, skipping any trade it has already stored.
 
 ## How to run
 
