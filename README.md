@@ -11,7 +11,14 @@ pip install -r requirements.txt
 python project.py
 ```
 
-The script prints one sample parsed trade, collects 5 live trades into `trades.db`, prints the row count and exits.
+The script prints one sample parsed trade, collects 5 live trades into `trades.db`, prints the row count and exits. Example output:
+
+```
+{'trade_id': 6853228070, 'price': 67174.08, 'quantity': 0.00018, 'trade_time_ms': 1794643117119, 'is_buyer_maker': True, 'symbol': 'BTCUSDT'}
+(10,)
+```
+
+The first line is the sample trade. The second is the number of rows in `trades.db`, which grows by 5 on every run.
 
 ## How to test
 
