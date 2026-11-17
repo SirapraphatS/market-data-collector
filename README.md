@@ -15,10 +15,10 @@ The script prints one sample parsed trade, collects 5 live trades into `trades.d
 
 ```
 {'trade_id': 6853228070, 'price': 67174.08, 'quantity': 0.00018, 'trade_time_ms': 1794643117119, 'is_buyer_maker': True, 'symbol': 'BTCUSDT'}
-(10,)
+(5,)
 ```
 
-The first line is the sample trade. The second is the number of rows in `trades.db`, which grows by 5 on every run.
+The first line is the sample trade. The second is the number of rows in `trades.db`: 5 on a first run, and 5 more on each later run.
 
 ## How to test
 
