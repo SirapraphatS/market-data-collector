@@ -1,8 +1,10 @@
-from project import parse_trade, next_delay, init_db
+from project import parse_trade, next_delay, init_db, save_trade
+
+
+raw = '{"e":"trade","E":1794643117119,"s":"BTCUSDT","t":6853228070,"p":"67174.08000000","q":"0.00018000","T":1794643117119,"m":true,"M":true}'
 
 
 def test_parse_trade():
-    raw = '{"e":"trade","E":1794643117119,"s":"BTCUSDT","t":6853228070,"p":"67174.08000000","q":"0.00018000","T":1794643117119,"m":true,"M":true}'
     result = parse_trade(raw)
     assert result['trade_id'] == 6853228070
     assert result['price'] == 67174.08000000
@@ -24,3 +26,10 @@ def test_init():
     assert ("trades",) in rows
 
 
+def test_save_trade():
+    conn = init_db(":memory:")
+    trade = parse_trade(raw)           
+    save_trade(conn, trade)
+    save_trade(conn, trade)   
+    count = conn.execute("SELECT COUNT(*) FROM trades").fetchone()
+    assert count == (1,)

@@ -24,8 +24,8 @@ def init_db(path):
 
 def save_trade(conn, trade):
     conn.execute(
-        "INSERT OR IGNORE INTO trades VALUES (?, ?, ?, ?, ?)",
-        (trade["trade_id"], trade["price"], trade["quantity"], trade["trade_time_ms"], int(trade["is_buyer_maker"])),
+        "INSERT OR IGNORE INTO trades(trade_id, price, quantity, trade_time_ms, is_buyer_maker, symbol)  VALUES (?, ?, ?, ?, ?, ?)",
+        (trade["trade_id"], trade["price"], trade["quantity"], trade["trade_time_ms"], int(trade["is_buyer_maker"]), trade["symbol"],)
     )
     conn.commit()
 
