@@ -11,7 +11,9 @@ pip install -r requirements.txt
 python project.py
 ```
 
-The script prints one sample parsed trade, collects 5 live trades into `trades.db`, prints the row count and exits. Example output:
+The script prints one sample parsed trade, collects 5 live trades into `trades.db`, prints the row count and exits.
+
+### Example output
 
 ```
 {'trade_id': 6853228070, 'price': 67174.08, 'quantity': 0.00018, 'trade_time_ms': 1794643117119, 'is_buyer_maker': True, 'symbol': 'BTCUSDT'}
@@ -42,15 +44,17 @@ WebSocket → parse_trade → SQLite
 
 ![Done: WebSocket, parse_trade, SQLite. Not done yet: reconnect loop and FastAPI](docs/status.png)
 
-Done:
+### Done
 
 - Connects to the Binance BTC/USDT trade stream and reads live messages.
 - `parse_trade`, `init_db` and `save_trade` work and each has a test. Saving the same trade twice leaves one row.
 - `next_delay(attempt)` returns the wait before a reconnect: 1, 2, 4 seconds and so on, doubling each attempt up to 60 seconds. It has a test.
 
-Not done yet:
+### Not done yet
 
 - Reconnect loop. `next_delay` exists but nothing calls it, so the script ends if the connection drops.
 - FastAPI. There is no API on top of the stored trades.
 
-Other limit: the script stops after 5 trades.
+### Limits
+
+- The script stops after 5 trades.
