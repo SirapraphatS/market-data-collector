@@ -29,6 +29,27 @@ def save_trade(conn, trade):
     )
     conn.commit()
 
+# Pseudo code of what this file does today
+#
+# main():
+#     ctx  = SSL context that trusts certifi's CA bundle
+#     conn = init_db("trades.db")              # create table trades if missing
+#     count = 0
+#     connect to the Binance WebSocket (URL)
+#     for each message that arrives:
+#         trade = parse_trade(message)         # JSON text -> dict with 6 fields
+#         save_trade(conn, trade)              # INSERT OR IGNORE, so a repeated trade_id is skipped
+#         count = count + 1
+#         if count >= 5: stop reading
+#     print the number of rows in trades
+#
+# parse_trade(raw):
+#     data = parse raw as JSON
+#     return dict: trade_id (int), price (float), quantity (float),
+#                  trade_time_ms (int), is_buyer_maker (bool), symbol (str)
+#
+# next_delay(attempt):                         # not called anywhere yet
+#     return the smaller of (2 ** attempt) and 60
 async def main():
     ctx = ssl.create_default_context(cafile=certifi.where())   
     conn = init_db("trades.db")
